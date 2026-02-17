@@ -43,10 +43,6 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', sans-serif;
             background: var(--bg-primary);
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -58,7 +54,11 @@
         }
 
         body::before {
-            display: none;
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background: var(--bg-image) center / cover no-repeat;
         }
 
         .container {
@@ -1024,8 +1024,8 @@
             }
 
             .player {
-                width: 28px;
-                height: 28px;
+                width: 34px;
+                height: 34px;
                 font-size: 11px;
                 border-width: 2px;
             }
@@ -1156,8 +1156,8 @@
             }
 
             .player {
-                width: 26px;
-                height: 26px;
+                width: 32px;
+                height: 32px;
                 font-size: 10px;
                 border-width: 2px;
             }
@@ -2534,7 +2534,7 @@
 
             currentBackgroundIndex = newIndex;
             const entry = backgroundPool[newIndex];
-            document.body.style.backgroundImage = `url('${entry.url}')`;
+            document.body.style.setProperty('--bg-image', `url('${entry.url}')`);
 
             // Update artist credit
             const artist = ARTISTS[entry.artistIndex];
